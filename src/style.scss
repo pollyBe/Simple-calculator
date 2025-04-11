@@ -18,3 +18,24 @@ footer{
   justify-content: space-between;
   align-items: center;
 }
+
+.calculator{
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: 100px repeat(5, 80px);
+  border: 2px solid #170303;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 320px;
+  margin: auto;
+}
+
+.calculator__display{
+  grid-column-start: 1;
+  grid-column-end: -1;
+}
+.zero{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
