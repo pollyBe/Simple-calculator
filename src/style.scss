@@ -7,12 +7,85 @@
 }
 
 body{
-  padding: 0 3rem;
+  //padding: 0 3rem;
   display: grid;
   grid-template-rows: 10vh 1fr 10vh;
   height: 100vh;
   background-color: #b3ab89;
 }
+
+.light-theme {
+    background-color: #b3ab89;
+
+  .theme-button,
+  .history-button{
+    background-color: rgba(202, 144, 156, 0.85);
+    color: #430606;
+  }
+  .calculator{
+    background-color: #602727;
+  }
+  .calculator__display{
+    background-color: #957a7a;
+    color: #300c0c;
+  }
+  .calculator__button{
+    background-color: #602727;
+    color: white;
+  }
+  .calculator__button-operation {
+    background-color: #880909;
+    color: white;
+  }
+  .divide,
+  .multiple,
+  .minus,
+  .plus,
+  .equals {
+    background-color: #d50e0e;
+  }
+  .author-name,
+  .date{
+    color: #2b0a0a;
+  }
+}
+
+.dark-theme {
+  background-color: #403d31;
+  .theme-button,
+  .history-button{
+    background-color: rgba(67, 46, 51, 0.85);
+    color: #8e5c5c;
+  }
+  .calculator{
+    background-color: #953e3e;
+  }
+  .calculator__display{
+    background-color: #957a7a;
+    color: #2b0a0a;
+  }
+  .calculator__button{
+    background-color: #953e3e;
+    color: #170303;
+  }
+  .calculator__button-operation {
+    background-color: #d18585;
+    color: #170303;
+  }
+  .divide,
+  .multiple,
+  .minus,
+  .plus,
+  .equals {
+    background-color: #e64040;
+  }
+  .author-name,
+  .date{
+    color: #a19393;
+  }
+}
+
+
 header{
   border-bottom: 1px solid black;
   display: flex;
@@ -22,11 +95,27 @@ main{
   padding: 100px 0;
 }
 
-.theme-button{
-  padding: 20px;
+.theme-button,
+.history-button {
+  width: 7%;
+  height: 70%;
   background-color: rgba(202, 144, 156, 0.85);
+  box-shadow: 0 5px 10px 2px rgba(28, 30, 32, 0.5);
+  border: none;
   color: #430606;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
   cursor: pointer;
+  margin-right: 2rem;
+  transition: ease 0.7s;
+  &:last-child{
+    margin-right: 0;
+  }
+  &:hover{
+    transform: scale(.97);
+  }
 }
 
 footer{
@@ -37,6 +126,7 @@ footer{
 }
 
 .calculator{
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 80px);
   grid-template-rows: 100px repeat(5, 80px);
@@ -47,6 +137,15 @@ footer{
   margin: auto;
   background-color: #602727;
   box-shadow: 0 5px 10px 2px rgba(28, 30, 32, 0.5);
+}
+
+.history-wrap{
+  display: none;
+  position: absolute;
+  right: 100%;
+  max-width: 100%;
+  height: 100%;
+  padding: 20px;
 }
 
 .calculator__display{
