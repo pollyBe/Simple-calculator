@@ -1,5 +1,5 @@
 export const createCalculatorView = () => `<div class="calculator">
-                <div class="calculator__display">0</div>
+                <div class="calculator__display"><p>0</p></div>
                 <button data-val="AC" class="calculator__button-operation clear">AC</button>
                 <button data-val="+/-" class="calculator__button-operation sign-change">+/-</button>
                 <button data-val="%" class="calculator__button-operation percent">%</button>

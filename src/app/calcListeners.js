@@ -4,15 +4,17 @@ let x = '';
 let y = '';
 let sign = '';
 let prevSign = '';
+let mutation = '';
 let result = false;
 
 const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
-const signs = ['+', '-', '*', '/', '+/-', '=', '%'];
+const numberMutationSigns = ['%', '+/-'];
+const signs = ['+', '-', '*', '/', '='];
 export const memorisedActions = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelector('.calculator');
-  const output = document.querySelector('.calculator__display');
+  const output = document.querySelector('.calculator__display p');
 
   function clearOutput(val = '0') {
     x = '';
@@ -37,7 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
         x = buttonValue;
         refreshOutput(x);
       } else if (y === '' && sign === '') {
-        x += buttonValue;
+        if (x === '0' && buttonValue !== '.') {
+          x = buttonValue;
+        } else x += buttonValue;
         refreshOutput(x);
       } else if (sign !== '') {
         y += buttonValue;
@@ -52,31 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         y = '';
         refreshOutput(sign);
       } else refreshOutput(sign);
-      // else if (x !== '' && y !== '' && prevSign !== '') {
-      //   x = calculate(x, y, prevSign).toString();
-      //   y = '';
-      //   refreshOutput(x);
-      // } else {
-      //   refreshOutput(sign);
-      // }
 
-      if (sign === '%') {
-        if (x !== '' && y === '') {
-          x = (parseFloat(x) / 100).toString();
-        } else if (x !== '' && y !== '') {
-          x = ((parseFloat(x) * parseFloat(y)) / 100).toString();
-        }
-        result = true;
-        refreshOutput(x);
-      } else if (sign === '+/-') {
-        if (x !== '' && y === '') {
-          x = (-parseFloat(x)).toString();
-          refreshOutput(x);
-        } else if (y !== '') {
-          y = (-parseFloat(y)).toString();
-          refreshOutput(y);
-        }
-      } else if (sign === '=') {
+      if (sign === '=') {
         if (x !== '' && y !== '') {
           x = calculate(x, y, prevSign);
           y = '';
@@ -89,8 +70,28 @@ document.addEventListener('DOMContentLoaded', () => {
         prevSign = '';
         refreshOutput(x);
       }
-    } else {
-      refreshOutput('Error!');
+    } else if (numberMutationSigns.includes(buttonValue)) {
+      mutation = buttonValue;
+
+      if (mutation === '%') {
+        if (x !== '' && y === '') {
+          x = calculate(x, y, mutation);
+        } else if (x !== '' && y !== '') {
+          x = calculate(x, y, mutation);
+        }
+        result = true;
+        refreshOutput(x);
+      } else if (mutation === '+/-') {
+        if (x !== '' && y === '') {
+          x = (-parseFloat(x)).toString();
+          refreshOutput(x);
+        } else if (y !== '') {
+          y = (-parseFloat(y)).toString();
+          refreshOutput(y);
+        }
+      } else {
+        refreshOutput('Error!');
+      }
     }
   });
 });
