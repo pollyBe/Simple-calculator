@@ -1,5 +1,3 @@
-import { memorisedActions } from './calcListeners';
-
 export function calculate(a, b, operator) {
   let res;
   switch (operator) {
@@ -30,7 +28,5 @@ export function calculate(a, b, operator) {
       res = 'Error! Invalid operator.';
       break;
   }
-  memorisedActions.push(`${a} ${operator} ${b} => ${res}`);
-  console.log(memorisedActions);
-  return Number.isInteger(res) ? res : res.toFixed(5);
+  return Number.isInteger(res) ? res : res.toFixed(5).replace(/\.?0+$/, '');
 }

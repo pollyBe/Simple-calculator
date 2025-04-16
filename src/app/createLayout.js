@@ -11,24 +11,21 @@ export const createLayout = () => {
       class: 'theme-button',
       type: 'button',
     },
-    ['Light']
+    ['Switch to Dark Theme']
   );
   themeButton.addEventListener('click', () => {
     if (body.classList.contains('light-theme')) {
-      themeButton.textContent = 'Dark';
+      themeButton.textContent = 'Switch to Light Theme';
       body.classList.remove('light-theme');
       body.classList.add('dark-theme');
     } else {
-      themeButton.textContent = 'Light';
+      themeButton.textContent = 'Switch to Dark Theme';
       body.classList.add('light-theme');
       body.classList.remove('dark-theme');
     }
   });
-  const historyButton = createElement('button', {
-    class: 'history-button',
-    type: 'button',
-  });
-  header.append(themeButton, historyButton);
+
+  header.append(themeButton);
   const main = createElement('main', { class: 'main' });
   main.innerHTML = createCalculatorView();
   const footer = createElement('footer', { class: 'footer' });

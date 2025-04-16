@@ -10,10 +10,9 @@ let result = false;
 const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
 const numberMutationSigns = ['%', '+/-'];
 const signs = ['+', '-', '*', '/', '='];
-export const memorisedActions = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-  const buttons = document.querySelector('.calculator');
+  const buttons = document.querySelector('.calculator__wrapper');
   const output = document.querySelector('.calculator__display p');
 
   function clearOutput(val = '0') {
@@ -21,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     y = '';
     sign = '';
     prevSign = '';
+    mutation = '';
     result = false;
     output.textContent = val;
   }
@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     output.textContent = value;
   }
 
-  buttons.addEventListener('click', (e) => {
-    let buttonValue = e.target.dataset.val;
+  function handleButtonInput(buttonValue) {
     if (buttonValue === 'AC') return clearOutput();
 
     if (numbers.includes(buttonValue)) {
@@ -92,6 +91,31 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         refreshOutput('Error!');
       }
+    }
+  }
+
+  buttons.addEventListener(
+    'click',
+    (e) => {
+      const buttonValue = e.target.dataset.val;
+      if (!buttonValue) return;
+      handleButtonInput(buttonValue);
+    },
+    true
+  );
+
+  document.addEventListener('keydown', (e) => {
+    const key = e.key;
+
+    if (
+      !isNaN(parseFloat(key)) ||
+      ['.', '+', '-', '*', '/', '%'].includes(key)
+    ) {
+      handleButtonInput(key);
+    } else if (key === 'Enter') {
+      handleButtonInput('=');
+    } else if (key === 'Escape') {
+      handleButtonInput('AC');
     }
   });
 });
